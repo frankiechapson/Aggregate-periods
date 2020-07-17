@@ -9,6 +9,7 @@ The following is a simple example and recursive selects to solve this problem.
 
 **A table for demo**
 
+```sql
     create table GA ( NAME character varying ( 100 ) 
                     , VFD  date
                     , VTD  date
@@ -29,6 +30,7 @@ The following is a simple example and recursive selects to solve this problem.
     insert into GA (NAME, VFD, VTD) values ( 'NAME_2', to_date('2019-02-09', 'yyyy-mm-dd') , to_date('2019-02-10', 'yyyy-mm-dd'));
     
     insert into GA (NAME, VFD, VTD) values ( 'NAME_2', to_date('2019-03-01', 'yyyy-mm-dd') , to_date('2019-03-02', 'yyyy-mm-dd'));
+```
 
 -------------------------------------
 **The Demo data**
@@ -61,6 +63,7 @@ The "-" shows the starting of an interval and "+" shows the continuation
 -------------------------------------
 **Postgre**
 
+```sql
     with recursive TT as
     ( select NAME
            , VFD
@@ -81,10 +84,10 @@ The "-" shows the starting of an interval and "+" shows the continuation
      group by NAME
          , VFD
     order by 1,2
-    
+```    
 -----------------------------
 **Oracle #1**
-
+```sql
     with TT ( NAME, VFD, VTD ) as
     ( select NAME
            , VFD
@@ -105,11 +108,11 @@ The "-" shows the starting of an interval and "+" shows the continuation
      group by NAME
          , VFD
     order by 1,2
-
+```
 ----------------------------
 **Oracle #2**
 
-
+```sql
     select NAME
          , VFD
          , max( VTD ) 
@@ -123,7 +126,7 @@ The "-" shows the starting of an interval and "+" shows the continuation
      group by NAME
             , VFD
     order by 1,2
-
+```
 ----------------------------
     
 
